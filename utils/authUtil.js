@@ -1,17 +1,17 @@
+const user = require('../auth/user.json');
+
 class AuthUtil {
   static async login(page) {
-    await page.goto('/login');
+    if (!user.email || !user.password) {
+      throw new Error('Email or password missing in user.json');
+    }
 
+    await page.goto('/login');   // relative URL, baseURL from config
 
-    await page.getByLabel('Email').fill(process.env.INF_USER);
-    await page.getByLabel('Password').fill(process.env.INF_PASS);
-    await page.getByRole('button', { name: 'Login' }).click();
-    if (!process.env.INF_USER || !process.env.INF_PASS) {
-  throw new Error('INF_USER or INF_PASS is not defined');
-}
+    await page.fill('#user_email', user.email);
+    await page.fill('#password', user.password);
+    await page.click('button[type="submit"]');
 
-
-    // Wait for dashboard to load (NO TIMEOUTS)
     await page.waitForURL('**/dashboard');
   }
 }
