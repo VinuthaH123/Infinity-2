@@ -1,0 +1,48 @@
+name: Playwright Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1️⃣ Checkout repository
+      - uses: actions/checkout@v4
+
+      # 2️⃣ Setup Node.js
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      # 3️⃣ Install dependencies
+      - name: Install dependencies
+        run: npm ci
+
+      # 4️⃣ Install Playwright browsers
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+
+      # 5️⃣ Run Playwright tests 10 times sequentially
+      - name: Run Playwright Tests 10 Times
+        run: |
+          for i in {1..10}; do
+            echo "===== Run #$i ====="
+            npx playwright test
+          done
+
+      # 6️⃣ Upload Playwright report
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+
+          path: playwright-report/
+          retention-days: 30
