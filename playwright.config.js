@@ -17,14 +17,14 @@ module.exports = defineConfig({
       name: 'Desktop Chrome',
       use: { viewport: { width: 1920, height: 1080 } }
     },
-    /*{
+    {
       name: 'Tablet Chrome',
       use: { viewport: { width: 768, height: 1024 } }
     },
     {
       name: 'Mobile Chrome',
       use: { viewport: { width: 375, height: 667 } }
-    }*/
+    }
   ],
 
   reporter: [['html', { open: 'never' }]]
