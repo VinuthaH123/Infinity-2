@@ -23,9 +23,30 @@ export default defineConfig({
 
   // ✅ ONLY Chrome
   projects: [
+    //{
+      //name: 'chromium',
+     // use: { ...devices['Desktop Chrome'] },
+    //},
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: 'Desktop',
+      use: {
+        ...devices['Desktop Chrome'],
+        viewport: { width: 1920, height: 1080 },
+      },
     },
+    {
+      name: 'Tablet',
+      use: {
+        ...devices['iPad (gen 7)'],
+        viewport: { width: 768, height: 1024 },
+      },
+    },
+    {
+      name: 'Mobile',
+      use: {
+        ...devices['iPhone 12'],
+        viewport: { width: 390, height: 844 },
+      },
+    }
   ],
 });
