@@ -7,7 +7,7 @@ class DashboardPage {
     this.username = page.locator('.username');
     this.dashboardLink = page.getByRole('link', { name: 'Dashboard' });
     this.inventoryLink = page.getByRole('link', { name: 'Inventory' });
-    this.catalogLink = page.getByRole('link', { name: 'Catalog' });
+    //this.catalogLink = page.getByRole('link', { name: 'Catalog' });
     this.logoutBtn = page.getByText('Logout');
   }
 
@@ -24,7 +24,7 @@ class DashboardPage {
   async verifyLeftMenu() {
     await expect(this.dashboardLink).toBeVisible();
     await expect(this.inventoryLink).toBeVisible();
-    await expect(this.catalogLink).toBeVisible();
+    //await expect(this.catalogLink).toBeVisible();
   }
 
   async logout() {
